@@ -12,12 +12,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        perl:
+        perl-version:
           - '5.30'
           - '5.42'
 
     runs-on: ubuntu-latest
-    name: OS Perl ${{matrix.perl}}
+    name: OS Perl ${{matrix.perl-version}}
     container:
       image: perldocker/perl-tester:${{ matrix.perl-version }}
         # https://hub.docker.com/r/perldocker/perl-tester
