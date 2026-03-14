@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         perl:
-          - 5.30
-          - 5.42
+          - '5.30'
+          - '5.42'
 
     runs-on: ubuntu-latest
     name: OS Perl ${{matrix.perl}}
