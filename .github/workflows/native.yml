@@ -17,8 +17,9 @@ jobs:
           - macos-latest
           - windows-latest
         perl:
-          - 5.30
-          - 5.42
+          # We need quotes or the 5.30 will be considered 5.3
+          - '5.30'
+          - '5.42'
         #exclude:
         #  - runner: windows-latest
         #    perl: '5.36'
