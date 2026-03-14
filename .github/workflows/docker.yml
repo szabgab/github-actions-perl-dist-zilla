@@ -1,4 +1,4 @@
-name: CI on Native
+name: CI in Docker
 
 on:
   push:
@@ -12,28 +12,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
         perl:
           - 5.30
           - 5.42
-        #exclude:
-        #  - runner: windows-latest
-        #    perl: '5.36'
 
-    runs-on: ${{matrix.runner}}
-    name: OS ${{matrix.runner}} Perl ${{matrix.perl}}
+    runs-on: ubuntu-latest
+    name: OS Perl ${{matrix.perl}}
 
     steps:
     - uses: actions/checkout@v6
-
-    - name: Set up perl
-      uses: shogo82148/actions-setup-perl@v1
-      with:
-          perl-version: ${{ matrix.perl }}
-          distribution: ${{ ( startsWith( matrix.runner, 'windows-' ) && 'strawberry' ) || 'default' }}
+      container:
+        image: perldocker/perl-tester:${{ matrix.perl-version }}
+        # https://hub.docker.com/r/perldocker/perl-tester
+     name: Perl ${{ matrix.perl-version }}
 
     - name: Show Perl Version
       run: |
